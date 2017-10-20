@@ -1,4 +1,4 @@
-package com.lapsa.utils;
+package tech.lapsa.javax.cdi.utility;
 
 import java.util.Iterator;
 import java.util.Optional;
