@@ -12,7 +12,7 @@
 	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Java EE Lib : REST commons</name>
+	<name>Java EE Lib : CDI commons</name>
 
 	<properties>
 		<!-- BOMS -->
