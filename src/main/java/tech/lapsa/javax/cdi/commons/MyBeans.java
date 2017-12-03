@@ -1,4 +1,4 @@
-package tech.lapsa.javax.cdi.utility;
+package tech.lapsa.javax.cdi.commons;
 
 import java.lang.annotation.Annotation;
 import java.util.Iterator;

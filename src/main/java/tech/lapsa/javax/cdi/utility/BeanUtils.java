@@ -3,6 +3,8 @@ package tech.lapsa.javax.cdi.utility;
 import java.lang.annotation.Annotation;
 import java.util.Optional;
 
+import tech.lapsa.javax.cdi.commons.MyBeans;
+
 @Deprecated
 public final class BeanUtils {
 
