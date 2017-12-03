@@ -11,9 +11,9 @@ import javax.enterprise.inject.spi.CDI;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public final class BeanUtils {
+public final class MyBeans {
 
-    private BeanUtils() {
+    private MyBeans() {
     }
 
     public static final <T> T getBean(Class<T> clazz) {
