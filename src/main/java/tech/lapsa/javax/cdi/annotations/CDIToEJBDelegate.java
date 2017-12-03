@@ -12,13 +12,13 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({ FIELD, TYPE, METHOD })
-public @interface CDItoEJBDelegate {
+public @interface CDIToEJBDelegate {
 
-    public static final Annotation ANNOTATION_INSTANCE = new CDItoEJBDelegate() {
+    public static final Annotation ANNOTATION_INSTANCE = new CDIToEJBDelegate() {
 
 	@Override
 	public Class<? extends Annotation> annotationType() {
-	    return CDItoEJBDelegate.class;
+	    return CDIToEJBDelegate.class;
 	}
     };
 
