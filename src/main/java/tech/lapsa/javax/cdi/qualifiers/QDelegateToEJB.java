@@ -14,7 +14,7 @@ import javax.inject.Qualifier;
 @Target({ FIELD, TYPE, METHOD })
 public @interface QDelegateToEJB {
 
-    public static final Annotation ANNOTATION_INSTANCE = new QDelegateToEJB() {
+    public static final Annotation DEFAULT_INSTANCE = new QDelegateToEJB() {
 
 	@Override
 	public Class<? extends Annotation> annotationType() {
