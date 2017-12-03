@@ -1,5 +1,6 @@
 package tech.lapsa.javax.cdi.utility;
 
+import java.lang.annotation.Annotation;
 import java.util.Iterator;
 import java.util.Optional;
 
@@ -49,27 +50,27 @@ public final class BeanUtils {
 	return res;
     }
 
-    public static <T> Optional<T> lookupCDI(final Class<T> clazz) {
+    public static <T> Optional<T> lookupCDI(final Class<T> clazz, final Annotation... qualifiers) {
 	Optional<T> res = Optional.empty();
 	if (!res.isPresent())
-	    res = lookupCDI11(clazz);
+	    res = lookupCDI11(clazz, qualifiers);
 	if (!res.isPresent())
-	    res = lookupCDI10(clazz);
+	    res = lookupCDI10(clazz, qualifiers);
 	return res;
     }
 
-    private static <T> Optional<T> lookupCDI11(final Class<T> clazz) {
+    private static <T> Optional<T> lookupCDI11(final Class<T> clazz, final Annotation... qualifiers) {
 	try {
-	    return Optional.ofNullable(CDI.current().select(clazz).get());
+	    return Optional.ofNullable(CDI.current().select(clazz, qualifiers).get());
 	} catch (Exception e) {
 	    return Optional.empty();
 	}
     }
 
-    private static <T> Optional<T> lookupCDI10(final Class<T> clazz) {
+    private static <T> Optional<T> lookupCDI10(final Class<T> clazz, final Annotation... qualifiers) {
 	try {
 	    final BeanManager bm = CDI.current().getBeanManager();
-	    final Iterator<Bean<?>> iter = bm.getBeans(clazz).iterator();
+	    final Iterator<Bean<?>> iter = bm.getBeans(clazz, qualifiers).iterator();
 	    if (!iter.hasNext())
 		return Optional.empty();
 	    @SuppressWarnings("unchecked")
