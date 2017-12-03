@@ -1,4 +1,4 @@
-package tech.lapsa.javax.cdi.annotations;
+package tech.lapsa.javax.cdi.qualifiers;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
@@ -12,13 +12,13 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({ FIELD, TYPE, METHOD })
-public @interface CDIToEJBDelegate {
+public @interface QDelegateToEJB {
 
-    public static final Annotation ANNOTATION_INSTANCE = new CDIToEJBDelegate() {
+    public static final Annotation ANNOTATION_INSTANCE = new QDelegateToEJB() {
 
 	@Override
 	public Class<? extends Annotation> annotationType() {
-	    return CDIToEJBDelegate.class;
+	    return QDelegateToEJB.class;
 	}
     };
 
