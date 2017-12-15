@@ -12,7 +12,7 @@ public final class BeanUtils {
     }
 
     @Deprecated
-    public static final <T> T getBean(Class<T> clazz) {
+    public static final <T> T getBean(final Class<T> clazz) {
 	return MyBeans.getBean(clazz);
     }
 
@@ -32,7 +32,7 @@ public final class BeanUtils {
     }
 
     @Deprecated
-    public static <T> Optional<T> lookupNaming(final Class<T> clazz, String name) {
+    public static <T> Optional<T> lookupNaming(final Class<T> clazz, final String name) {
 	return MyBeans.lookupNaming(clazz, name);
     }
 

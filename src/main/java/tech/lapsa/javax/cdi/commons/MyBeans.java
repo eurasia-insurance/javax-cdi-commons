@@ -16,28 +16,28 @@ public final class MyBeans {
     private MyBeans() {
     }
 
-    public static final <T> T getBean(Class<T> clazz) {
+    public static final <T> T getBean(final Class<T> clazz) {
 	try {
 	    return getBean11(clazz);
-	} catch (Throwable e) {
+	} catch (final Throwable e) {
 	    try {
 		return getBean10(clazz);
-	    } catch (Throwable e1) {
+	    } catch (final Throwable e1) {
 		return null;
 	    }
 	}
     }
 
-    private static <T> T getBean11(Class<T> clazz) {
+    private static <T> T getBean11(final Class<T> clazz) {
 	return CDI.current().select(clazz).get();
     }
 
     @SuppressWarnings("unchecked")
-    private static <T> T getBean10(Class<T> clazz) {
-	BeanManager bm = CDI.current().getBeanManager();
-	Bean<T> bean = (Bean<T>) bm.getBeans(clazz).iterator().next();
-	CreationalContext<T> ctx = bm.createCreationalContext(bean);
-	T ref = (T) bm.getReference(bean, clazz, ctx);
+    private static <T> T getBean10(final Class<T> clazz) {
+	final BeanManager bm = CDI.current().getBeanManager();
+	final Bean<T> bean = (Bean<T>) bm.getBeans(clazz).iterator().next();
+	final CreationalContext<T> ctx = bm.createCreationalContext(bean);
+	final T ref = (T) bm.getReference(bean, clazz, ctx);
 	return ref;
     }
 
@@ -62,7 +62,7 @@ public final class MyBeans {
     private static <T> Optional<T> lookupCDI11(final Class<T> clazz, final Annotation... qualifiers) {
 	try {
 	    return Optional.ofNullable(CDI.current().select(clazz, qualifiers).get());
-	} catch (Exception e) {
+	} catch (final Exception e) {
 	    return Optional.empty();
 	}
     }
@@ -88,12 +88,12 @@ public final class MyBeans {
 	return lookupNaming(clazz, clazz.getCanonicalName());
     }
 
-    public static <T> Optional<T> lookupNaming(final Class<T> clazz, String name) {
+    public static <T> Optional<T> lookupNaming(final Class<T> clazz, final String name) {
 	try {
 	    final InitialContext ic = new InitialContext();
 	    final Object object = ic.lookup(name);
 	    @SuppressWarnings("unchecked")
-	    T obj = (T) object;
+	    final T obj = (T) object;
 	    return Optional.of(obj);
 	} catch (NamingException | ClassCastException | NullPointerException e) {
 	    return Optional.empty();
