@@ -25,15 +25,4 @@ public final class BeanUtils {
     public static <T> Optional<T> lookupCDI(final Class<T> clazz, final Annotation... qualifiers) {
 	return MyBeans.lookupCDI(clazz, qualifiers);
     }
-
-    @Deprecated
-    public static <T> Optional<T> lookupNaming(final Class<T> clazz) {
-	return MyBeans.lookupNaming(clazz);
-    }
-
-    @Deprecated
-    public static <T> Optional<T> lookupNaming(final Class<T> clazz, final String name) {
-	return MyBeans.lookupNaming(clazz, name);
-    }
-
 }
