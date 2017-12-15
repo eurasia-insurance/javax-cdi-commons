@@ -3,6 +3,7 @@ package tech.lapsa.javax.cdi.commons;
 import java.lang.annotation.Annotation;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -11,7 +12,11 @@ import javax.enterprise.inject.spi.CDI;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import tech.lapsa.java.commons.function.MyExceptions;
+
 public final class MyBeans {
+
+    private static final String DEFAULT_APPLICATION_SUFFIX = "-ear";
 
     private MyBeans() {
     }
@@ -98,6 +103,65 @@ public final class MyBeans {
 	} catch (NamingException | ClassCastException | NullPointerException e) {
 	    return Optional.empty();
 	}
+    }
+
+    public static enum EJBBeanType {
+	LOCAL("Local"), REMOTE("Remote");
+
+	private final String suffix;
+
+	private EJBBeanType(final String prefix) {
+	    this.suffix = prefix;
+	}
+    }
+
+    public static <T> T lookupEJB(final String applicationName, final String module, final String beanName,
+	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
+	    throws NamingException, ClassCastException {
+	return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
+    }
+
+    public static <T> T lookupEJB(final String applicationName, final String module,
+	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
+	    throws NamingException, ClassCastException {
+	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
+	return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
+    }
+
+    public static <T, X extends Throwable> T lookupEJB(final BiFunction<String, Throwable, X> creator,
+	    final String applicationName, final String module,
+	    final Class<? extends T> interfaceClazz, final Class<T> typeClazz)
+	    throws X {
+	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
+	try {
+	    return lookupEJB(applicationName, module, beanName, interfaceClazz.getName(), typeClazz);
+	} catch (ClassCastException | NamingException e) {
+	    throw MyExceptions.format(creator, e, "Can't instantiate ejb for %1$s", typeClazz.getSimpleName());
+	}
+    }
+
+    private static final String DEFAULT_BEAN_SUFFIX = "Bean";
+
+    public static <T> T lookupEJB(final String module, final EJBBeanType type, final Class<T> typeClazz)
+	    throws NamingException, ClassCastException {
+	final String applicationName = module + DEFAULT_APPLICATION_SUFFIX;
+	final String beanName = typeClazz.getSimpleName() + DEFAULT_BEAN_SUFFIX;
+	final String interfaceName = typeClazz.getName() + "$" + typeClazz.getSimpleName() + type.suffix;
+	return lookupEJB(applicationName, module, beanName, interfaceName, typeClazz);
+    }
+
+    public static <T> T lookupEJB(final String applicationName, final String module, final String beanName,
+	    final String interfaceName, final Class<T> typeClazz) throws NamingException, ClassCastException {
+	final String pathPattern = "java:global/%1$s/%2$s/%3$s!%4$s";
+	final String path = String.format(pathPattern,
+		applicationName, // 1
+		module, // 2
+		beanName, // 3
+		interfaceName // 4
+	);
+	final InitialContext ic = new InitialContext();
+	final Object object = ic.lookup(path);
+	return typeClazz.cast(object);
     }
 
 }
