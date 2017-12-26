@@ -9,7 +9,7 @@
 
 	<groupId>tech.lapsa.javax</groupId>
 	<artifactId>javax-cdi-commons</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>Java EE Lib : CDI commons</name>
@@ -59,7 +59,7 @@
 	<scm>
 		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/javax/cdi-commons.git</connection>
 		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/javax/cdi-commons.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v1.1</tag>
 	</scm>
 
 	<issueManagement>
