@@ -9,15 +9,15 @@
 
 	<groupId>tech.lapsa.javax</groupId>
 	<artifactId>javax-cdi-commons</artifactId>
-	<version>1.2</version>
+	<version>CURRENT-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Java EE Lib : CDI commons</name>
 
 	<properties>
 		<!-- BOMS -->
-		<javax-javaee-bom.version>7.0a</javax-javaee-bom.version>
-		<java-commons.version>1.3</java-commons.version>
+		<javax-javaee-bom.version>CURRENT-SNAPSHOT</javax-javaee-bom.version>
+		<java-commons.version>CURRENT-SNAPSHOT</java-commons.version>
 	</properties>
 
 	<dependencyManagement>
