@@ -57,9 +57,9 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:git:https://gitlab.lapsa.tech/lapsa/javax/cdi-commons.git</connection>
-		<developerConnection>scm:git:https://gitlab.lapsa.tech/lapsa/javax/cdi-commons.git</developerConnection>
-		<tag>v1.2</tag>
+		<connection>scm:git:https://github.com/eurasia-insurance/javax-cdi-commons.git</connection>
+		<developerConnection>scm:git:https://github.com/eurasia-insurance/javax-cdi-commons.git</developerConnection>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
